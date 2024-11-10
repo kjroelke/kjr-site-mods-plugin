@@ -14,7 +14,7 @@ class Plugin_Loader {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'pre_get_posts', array( $this, 'modify_main_query' ) );
+		add_action( 'pre_get_posts', array( $this, 'modify_main_query' ),20,1 );
 	}
 
 	/**
@@ -24,9 +24,13 @@ class Plugin_Loader {
 	 * @return void
 	 */
 	public function modify_main_query( $query ): void {
-		if ( ! is_admin() && $query->is_main_query() ) {
-			$query->set( 'post_type', array( 'post', 'portfolio-item' ) );
+		$is_admin = is_admin();
+		$is_main_query = $query->is_main_query();
+		$is_archive = $query->is_archive();
+		if ( $is_admin || ! $is_archive  || ! $is_main_query ) {
+			return;
 		}
+		$query->set( 'post_type', array( 'post', 'kjr-portfolio-item' ) );
 	}
 
 
