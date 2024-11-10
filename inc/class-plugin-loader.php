@@ -3,17 +3,32 @@
  * Plugin Loader
  *
  * @since 1.0
- * @package ChoctawNation
- * @subpackage
+ * @package KJR
  */
 
+namespace KJR;
+
 /** Inits the Plugin */
-final class Plugin_Loader {
+class Plugin_Loader {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
+		add_action( 'pre_get_posts', array( $this, 'modify_main_query' ) );
 	}
+
+	/**
+	 * Modifies the main query to add post-type 'portfolio-item' to 'post'
+	 *
+	 * @param WP_Query $query The main query object.
+	 * @return void
+	 */
+	public function modify_main_query( $query ): void {
+		if ( ! is_admin() && $query->is_main_query() ) {
+			$query->set( 'post_type', array( 'post', 'portfolio-item' ) );
+		}
+	}
+
 
 	/**
 	 * Initializes the Plugin

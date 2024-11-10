@@ -1,20 +1,18 @@
 {
-	"name": "choctaw-plugin-template",
+	"name": "kjr-site-mods-plugin",
 	"version": "1.0.0",
-	"description": "Choctaw Plugin template",
+	"description": "A small plugin for recreating theme 'functions.php' file for an site built with Gutenberg.",
 	"prettier": "@wordpress/prettier-config",
 	"browserslist": [
 		"extends @wordpress/browserslist-config"
 	],
-	"author": "Choctaw Nation of Oklahoma",
+	"author": "K.J. Roelke",
 	"files": [
 		"dist",
 		"inc",
-		"template-parts",
-		"templates",
 		"readme.md",
 		"LICENSE",
-		"index.php"
+		"kjr-site-mods.php"
 	],
 	"scripts": {
 		"build": "wp-scripts build",
@@ -23,8 +21,10 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^27.9.0",
-		"eslint-config-react-app": "^7.0.1",
-		"wp-types": "^3.65.0"
+		"@wordpress/scripts": "^30.4.0"
+	},
+	"overrides": {
+		"cookie": "^1.0.0",
+		"puppeteer-core": "^23.4.0"
 	}
 }
